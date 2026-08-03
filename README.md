@@ -250,18 +250,16 @@ The page therefore uses the AVIF as its primary HDR tile and offers the JPEG as 
 
 The AVIF contains the core HDR signaling needed here—Rec.2020 primaries, PQ transfer, full range, 10-bit samples—and absolute PQ code values targeting 1,000 nits. This FFmpeg path does not add optional HDR10 mastering-display (`mDCV`) or MaxCLL/MaxFALL metadata to the still image, and the demo does not claim that it does.
 
-## GitHub Pages
+## Live demo and GitHub Pages
 
-The project has no build step and includes `.nojekyll`. To publish from a GitHub repository:
+- Public, unbranded demo: <https://dzoba.github.io/bright-pixels/>
+- Optional GCAI artwork: <https://dzoba.github.io/bright-pixels/?gcai=true>
+- Source: <https://github.com/dzoba/bright-pixels>
 
-1. Push these files to the repository’s default branch.
-2. Open **Settings → Pages**.
-3. Choose **Deploy from a branch**.
-4. Select the default branch and `/ (root)`.
-5. After deployment, verify the AVIF response header:
+The project has no build step and includes `.nojekyll`. GitHub Pages deploys directly from `main` at `/ (root)`. Verify the live AVIF response header with:
 
 ```bash
-curl -I https://YOUR-NAME.github.io/YOUR-REPO/assets/logo-hdr-pq.avif
+curl -I https://dzoba.github.io/bright-pixels/assets/logo-hdr-pq.avif
 ```
 
 Look for:
