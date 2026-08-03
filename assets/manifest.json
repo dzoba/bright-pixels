@@ -1,0 +1,91 @@
+{
+  "source": {
+    "precision": "float64 linear light",
+    "color_primaries": "Rec.2020",
+    "units": "cd/m\u00b2 (nits)",
+    "width": 1024,
+    "height": 1024,
+    "peak_nits": 1000.0,
+    "sdr_reference_nits": 203.0
+  },
+  "variants": {
+    "generic": {
+      "artwork": "programmatic 5x5 pixel aperture",
+      "assets": {
+        "logo-sdr.png": {
+          "bytes": 5043,
+          "sha256": "43c4232c04dab76d38ccd452f715b717ce830b7e0c6006b97815d2b12675df7a"
+        },
+        "logo-sdr-max.png": {
+          "bytes": 5037,
+          "sha256": "6d7b21ed67566b2f28c0f788d340c330cc4f4a216af75dfa944d83d382232aba"
+        },
+        "logo-hdr-pq.avif": {
+          "bytes": 2197,
+          "sha256": "9edc5411f7147e423bed616a73729007752a5cd6b09f678612856f7dcdef7bc1"
+        },
+        "logo-hdr-pq.jpg": {
+          "bytes": 40514,
+          "sha256": "e02999f0d8524b065505bba37956c618641f10a17f353a9062430151e3054080"
+        },
+        "logo-hdr-tonemapped.png": {
+          "bytes": 5037,
+          "sha256": "a4df6d6df2888d9ab9e82c085f6cb24c2bc3a026fe89a57bb6c54c7640f5a286"
+        }
+      }
+    },
+    "gcai": {
+      "artwork": "assets/source/gcai.avif",
+      "artwork_sha256": "a0961a35ce508795eaa0cb606a37a629ed6e9caa1011f6c838de059463962c69",
+      "assets": {
+        "logo-sdr.png": {
+          "bytes": 35597,
+          "sha256": "bf9339c8082d6ee9530f3c94513d5d209d5dbb8215f9de606cb2125425a1ea10"
+        },
+        "logo-sdr-max.png": {
+          "bytes": 31178,
+          "sha256": "6ba7bb5b0afc01ab336864d373c883a6b6a4b10382c11e1a6e3ffd28f57c3327"
+        },
+        "logo-hdr-pq.avif": {
+          "bytes": 9799,
+          "sha256": "d0ef42326bbabbba3e44757eac59b6579f77899252672adbbc9002e5bf16dabe"
+        },
+        "logo-hdr-pq.jpg": {
+          "bytes": 49474,
+          "sha256": "d6aadbf26d4e4df3c13247507dc52f1ba8adb2fea698c66fb331c7720d86d15e"
+        },
+        "logo-hdr-tonemapped.png": {
+          "bytes": 31156,
+          "sha256": "5fcf2716d6e61ed82d3c744bf991207041cb6cb741d8b0c707fd1906deb3e2f8"
+        }
+      }
+    }
+  },
+  "assets": {
+    "logo-sdr.png": {
+      "bytes": 5043,
+      "sha256": "43c4232c04dab76d38ccd452f715b717ce830b7e0c6006b97815d2b12675df7a"
+    },
+    "logo-sdr-max.png": {
+      "bytes": 5037,
+      "sha256": "6d7b21ed67566b2f28c0f788d340c330cc4f4a216af75dfa944d83d382232aba"
+    },
+    "logo-hdr-pq.avif": {
+      "bytes": 2197,
+      "sha256": "9edc5411f7147e423bed616a73729007752a5cd6b09f678612856f7dcdef7bc1"
+    },
+    "logo-hdr-pq.jpg": {
+      "bytes": 40514,
+      "sha256": "e02999f0d8524b065505bba37956c618641f10a17f353a9062430151e3054080"
+    },
+    "logo-hdr-tonemapped.png": {
+      "bytes": 5037,
+      "sha256": "a4df6d6df2888d9ab9e82c085f6cb24c2bc3a026fe89a57bb6c54c7640f5a286"
+    }
+  },
+  "icc_profile": {
+    "path": "bright-pixels-rec2100-pq.icc",
+    "bytes": 8816,
+    "sha256": "9e16846a8a33a190e543622eee90e9721949321edb7092f5d16de50ec13546f3"
+  }
+}

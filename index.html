@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en" data-background="dark">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A reproducible field test for HDR images displayed inside an otherwise SDR webpage.">
+    <meta name="color-scheme" content="dark light">
+    <title>HDR Image Brightness Demonstration</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#comparison">Skip to the comparison</a>
+
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-kicker">
+          <span>Display field test 001</span>
+          <span>Rec.2100 · PQ · 1,000 nit target</span>
+        </div>
+
+        <div class="hero-grid">
+          <div>
+            <h1>HDR Image Brightness Demonstration</h1>
+            <p class="hero-lede">
+              All four image elements use the same CSS. One image is encoded as HDR and may use the display’s brightness headroom.
+            </p>
+          </div>
+
+          <div class="headroom-readout" aria-label="The HDR target is 4.9 times the 203 nit SDR reference level">
+            <span class="readout-number">4.9×</span>
+            <span class="readout-label">1,000 nit highlight<br>÷ 203 nit SDR reference</span>
+          </div>
+        </div>
+
+        <div class="hero-proof" aria-label="Conditions held constant">
+          <span id="artworkName">One geometric mark</span>
+          <span>One image rule</span>
+          <span>Zero CSS brightening</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="lab-section comparison-section" id="comparison" aria-labelledby="comparison-heading">
+          <div class="section-heading">
+            <div>
+              <p class="section-index">Live comparison</p>
+              <h2 id="comparison-heading">Four files. One CSS rule.</h2>
+            </div>
+            <p>
+              Select a tile to inspect it. Shuffle and hide the labels if you want a blind test.
+            </p>
+          </div>
+
+          <div class="control-deck" aria-label="Comparison controls">
+            <fieldset class="segmented-control">
+              <legend>Surround</legend>
+              <button type="button" data-background-choice="dark" aria-pressed="true">Dark gray</button>
+              <button type="button" data-background-choice="mid" aria-pressed="false">Mid gray</button>
+              <button type="button" data-background-choice="white" aria-pressed="false">White</button>
+            </fieldset>
+
+            <div class="action-controls">
+              <button type="button" id="labelsToggle" aria-pressed="false">Hide labels</button>
+              <button type="button" id="shuffleButton">Shuffle tiles</button>
+              <button type="button" id="isolationToggle" aria-pressed="false">Isolation mode</button>
+            </div>
+          </div>
+
+          <p class="sr-only" id="controlStatus" aria-live="polite"></p>
+
+          <div class="ambient-zone" id="comparisonStage">
+            <p class="ambient-caption">Surround: <strong id="surroundLabel">dark gray</strong></p>
+
+            <div class="tile-grid" id="tileGrid">
+              <article class="demo-tile" data-asset="sdr" data-selected="true">
+                <button class="image-target" type="button" aria-label="Inspect logo-sdr.png" aria-pressed="true">
+                  <span class="image-frame">
+                    <img class="demo-image" data-asset-image="sdr" src="assets/logo-sdr.png" alt="Geometric pixel mark, normal SDR encoding" width="160" height="160">
+                  </span>
+                </button>
+                <div class="tile-labels">
+                  <div class="tile-title"><span class="tile-position">A</span><code>logo-sdr.png</code></div>
+                  <dl class="tile-facts">
+                    <div><dt>Space</dt><dd>sRGB</dd></div>
+                    <div><dt>Transfer</dt><dd>sRGB</dd></div>
+                    <div><dt>Range</dt><dd>SDR</dd></div>
+                  </dl>
+                  <p>Ordinary SDR white, encoded below the channel ceiling.</p>
+                </div>
+              </article>
+
+              <article class="demo-tile" data-asset="sdr-max" data-selected="false">
+                <button class="image-target" type="button" aria-label="Inspect logo-sdr-max.png" aria-pressed="false">
+                  <span class="image-frame">
+                    <img class="demo-image" data-asset-image="sdr-max" src="assets/logo-sdr-max.png" alt="Geometric pixel mark, maximum SDR encoding" width="160" height="160">
+                  </span>
+                </button>
+                <div class="tile-labels">
+                  <div class="tile-title"><span class="tile-position">B</span><code>logo-sdr-max.png</code></div>
+                  <dl class="tile-facts">
+                    <div><dt>Space</dt><dd>sRGB</dd></div>
+                    <div><dt>Transfer</dt><dd>sRGB</dd></div>
+                    <div><dt>Range</dt><dd>SDR</dd></div>
+                  </dl>
+                  <p>RGB is pushed to 255. It still cannot exceed SDR white.</p>
+                </div>
+              </article>
+
+              <article class="demo-tile" data-asset="hdr" data-selected="false">
+                <button class="image-target" type="button" aria-label="Inspect logo-hdr-pq.avif" aria-pressed="false">
+                  <span class="image-frame">
+                    <img class="demo-image" data-asset-image="hdr" src="assets/logo-hdr-pq.avif" alt="Geometric pixel mark, HDR Rec.2020 PQ encoding" width="160" height="160">
+                  </span>
+                </button>
+                <div class="tile-labels">
+                  <div class="tile-title"><span class="tile-position">C</span><code>logo-hdr-pq.avif</code></div>
+                  <dl class="tile-facts">
+                    <div><dt>Space</dt><dd>Rec.2020</dd></div>
+                    <div><dt>Transfer</dt><dd>PQ / ST 2084</dd></div>
+                    <div><dt>Range</dt><dd>HDR · 1,000 nit</dd></div>
+                  </dl>
+                  <p>10-bit AVIF. Its logo pixels may enter display headroom.</p>
+                </div>
+              </article>
+
+              <article class="demo-tile" data-asset="tone" data-selected="false">
+                <button class="image-target" type="button" aria-label="Inspect logo-hdr-tonemapped.png" aria-pressed="false">
+                  <span class="image-frame">
+                    <img class="demo-image" data-asset-image="tone" src="assets/logo-hdr-tonemapped.png" alt="Geometric pixel mark, HDR source tone-mapped to SDR" width="160" height="160">
+                  </span>
+                </button>
+                <div class="tile-labels">
+                  <div class="tile-title"><span class="tile-position">D</span><code>logo-hdr-tonemapped.png</code></div>
+                  <dl class="tile-facts">
+                    <div><dt>Space</dt><dd>sRGB</dd></div>
+                    <div><dt>Transfer</dt><dd>sRGB</dd></div>
+                    <div><dt>Range</dt><dd>SDR tone-map</dd></div>
+                  </dl>
+                  <p>The HDR source compressed into an ordinary screenshot-like range.</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="isolation-bay" id="isolationBay" hidden>
+              <button class="step-button" id="previousButton" type="button" aria-label="Previous image">← Previous</button>
+              <div class="isolated-tile">
+                <p class="isolation-counter" id="isolationCounter">1 of 4</p>
+                <span class="image-frame">
+                  <img class="demo-image" id="isolationImage" src="assets/logo-sdr.png" alt="Selected geometric comparison image" width="160" height="160">
+                </span>
+                <p class="tile-labels isolation-label"><code id="isolationFilename">logo-sdr.png</code></p>
+              </div>
+              <button class="step-button" id="nextButton" type="button" aria-label="Next image">Next →</button>
+            </div>
+          </div>
+
+          <div class="proof-grid">
+            <section class="inspection-panel" aria-labelledby="inspection-heading">
+              <div class="inspection-heading-row">
+                <div>
+                  <p class="section-index">Browser-computed values</p>
+                  <h3 id="inspection-heading">CSS inspection</h3>
+                </div>
+                <code id="selectedFilename">logo-sdr.png</code>
+              </div>
+              <dl class="computed-values" id="computedValues"></dl>
+              <p class="inspection-note">Read from the selected <code>img.demo-image</code> with <code>getComputedStyle()</code>.</p>
+            </section>
+
+            <aside class="metadata-panel" aria-labelledby="metadata-heading">
+              <p class="section-index">File-level evidence</p>
+              <h3 id="metadata-heading">What the CSS cannot tell you</h3>
+              <dl class="metadata-stack">
+                <div><dt>Codec</dt><dd>AV1, 10-bit</dd></div>
+                <div><dt>Primaries</dt><dd>bt2020</dd></div>
+                <div><dt>Transfer</dt><dd>smpte2084</dd></div>
+                <div><dt>Matrix</dt><dd>bt2020nc</dd></div>
+                <div><dt>Range</dt><dd>full</dd></div>
+              </dl>
+              <p class="decode-status" id="avifDecodeStatus">Checking AVIF decode…</p>
+              <p class="hash-line">Manifest: <span id="assetHash">loading…</span></p>
+              <a class="text-link" id="experimentalJpegLink" href="assets/logo-hdr-pq.jpg" download>Download experimental HDR JPEG</a>
+            </aside>
+          </div>
+        </section>
+
+        <section class="lab-section reference-section" aria-labelledby="reference-heading">
+          <div class="section-heading">
+            <div>
+              <p class="section-index">Reference-white comparison</p>
+              <h2 id="reference-heading">Can the file outrun <code>#fff</code>?</h2>
+            </div>
+            <p>CSS white is the reference. The HDR mark is the challenger.</p>
+          </div>
+
+          <div class="reference-rig ambient-zone">
+            <div class="reference-item">
+              <div class="css-reference-white" aria-label="Plain CSS white rectangle"></div>
+              <div class="reference-caption">
+                <code>background: rgb(255, 255, 255);</code>
+                <span>SDR reference white</span>
+              </div>
+            </div>
+
+            <div class="versus" aria-hidden="true">vs.</div>
+
+            <div class="reference-item">
+              <span class="image-frame">
+                <img class="demo-image" data-asset-image="hdr" src="assets/logo-hdr-pq.avif" alt="HDR geometric mark beside CSS white" width="160" height="160">
+              </span>
+              <div class="reference-caption">
+                <code>logo-hdr-pq.avif</code>
+                <span>PQ highlights may physically exceed CSS white</span>
+              </div>
+            </div>
+          </div>
+
+          <p class="callout">
+            If the mark is actually brighter, the extra luminance came through the decoded image and the display pipeline. The rectangle has no HDR metadata to request that headroom.
+          </p>
+        </section>
+
+        <section class="lab-section capability-section" aria-labelledby="capability-heading">
+          <div class="section-heading">
+            <div>
+              <p class="section-index">Local capability report</p>
+              <h2 id="capability-heading">Does this browser report HDR?</h2>
+            </div>
+            <p>An indicator, not a guarantee that this particular image reaches HDR output.</p>
+          </div>
+
+          <div class="hdr-status">
+            <div class="css-hdr-indicator">
+              <span>CSS media query</span>
+              <strong></strong>
+            </div>
+            <dl class="capability-grid">
+              <div><dt><code>(dynamic-range: high)</code></dt><dd id="dynamicRangeValue">checking…</dd></div>
+              <div><dt>AVIF image decode</dt><dd id="capabilityAvifValue">checking…</dd></div>
+              <div><dt>devicePixelRatio</dt><dd id="pixelRatioValue">checking…</dd></div>
+              <div><dt>Screen color depth</dt><dd id="colorDepthValue">checking…</dd></div>
+              <div><dt>Served over HTTP(S)</dt><dd id="protocolValue">checking…</dd></div>
+              <div class="user-agent-row"><dt>Browser user agent</dt><dd id="userAgentValue">checking…</dd></div>
+            </dl>
+          </div>
+
+          <p class="fine-print">
+            A “high” result only says the browser reports a high-dynamic-range output environment. Browser codec support, macOS EDR compositing, display mode, power state, and available brightness headroom still decide the visible result.
+          </p>
+        </section>
+
+        <section class="lab-section screenshot-section" aria-labelledby="screenshot-heading">
+          <div class="section-heading">
+            <div>
+              <p class="section-index">Capture test</p>
+              <h2 id="screenshot-heading">Screenshot Experiment</h2>
+            </div>
+            <p>The screen is an output device. A screenshot is another image file.</p>
+          </div>
+
+          <div class="experiment-grid">
+            <ol class="experiment-steps">
+              <li><span>Observe the HDR tile directly on the display.</span></li>
+              <li><span>Take a normal macOS screenshot.</span></li>
+              <li><span>Open the screenshot beside the live webpage.</span></li>
+              <li><span>Compare whether the brightness difference was flattened or tone-mapped.</span></li>
+            </ol>
+
+            <aside class="capture-warning">
+              <p class="section-index">What this test measures</p>
+              <p>A normal capture often records composited pixel values after tone mapping. It does not record the physical light that reached your eye.</p>
+              <p>DOM or canvas capture would be less useful here: canvas may convert or tone-map the HDR file, and JavaScript cannot measure emitted nits.</p>
+            </aside>
+          </div>
+        </section>
+
+        <section class="lab-section pipeline-section" aria-labelledby="pipeline-heading">
+          <div class="section-heading">
+            <div>
+              <p class="section-index">Two rendering paths</p>
+              <h2 id="pipeline-heading">Where the extra light comes from</h2>
+            </div>
+            <p>The fork happens in the file’s color description, before CSS layout.</p>
+          </div>
+
+          <div class="pipeline-diagram">
+            <ol class="pipeline-path hdr-path" aria-label="HDR image pipeline">
+              <li><span>Image file</span></li>
+              <li><span>Embedded Rec.2020 + PQ metadata</span></li>
+              <li><span>Browser color management</span></li>
+              <li><span>macOS Extended Dynamic Range compositor</span></li>
+              <li><span>XDR display brightness headroom</span></li>
+            </ol>
+
+            <ol class="pipeline-path sdr-path" aria-label="SDR image pipeline">
+              <li><span>sRGB image</span></li>
+              <li><span>SDR reference white</span></li>
+              <li><span>Normal webpage brightness ceiling</span></li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="lab-section falsification-section" aria-labelledby="falsification-heading">
+          <div class="section-heading">
+            <div>
+              <p class="section-index">Skeptic’s checklist</p>
+              <h2 id="falsification-heading">How to tell this from a CSS trick</h2>
+            </div>
+          </div>
+          <ul class="falsification-list">
+            <li>Inspect the computed values above: no filter, opacity change, blend mode, transform, shadow, or animation.</li>
+            <li>Use isolation mode: every file occupies the same 160 × 160 position.</li>
+            <li>Switch the surround to white: physical luminance headroom survives a contrast change.</li>
+            <li>Download the files and run the verification script: the difference lives in transfer and gamut metadata.</li>
+          </ul>
+        </section>
+      </main>
+
+      <footer>
+        <p>Built as a reproducible color-pipeline test. <a href="README.md">Read setup and verification notes</a>.</p>
+        <p>No bloom. No brightness filter. No canvas preprocessing.</p>
+      </footer>
+    </div>
+  </body>
+</html>
