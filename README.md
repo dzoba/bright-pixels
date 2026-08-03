@@ -1,6 +1,6 @@
 # HDR image brightness demonstration
 
-A self-contained GitHub Pages demo showing how an HDR image can use physical display headroom while sitting inside an otherwise SDR webpage. The page does not brighten the HDR case with CSS: all comparison images share one rule, and the reliable HDR asset is a real 10-bit AVIF tagged Rec.2020 + PQ (SMPTE ST 2084).
+A self-contained GitHub Pages demo showing how an HDR image can use physical display headroom while sitting inside an otherwise SDR webpage. The page does not brighten the HDR case with CSS: every file is presented with the same declared and computed styles, and the reliable HDR asset is a real 10-bit AVIF tagged Rec.2020 + PQ (SMPTE ST 2084).
 
 The default artwork is an unbranded geometric mark. Add `?gcai=true` to the page URL to switch every comparison image to the optional GCAI artwork:
 
