@@ -36,8 +36,12 @@ index.html
 styles.css
 script.js
 requirements.txt
+favicon.svg
+favicon.ico
+apple-touch-icon.png
 scripts/
   generate_assets.py
+  generate_social_assets.py
   verify_assets.py
   serve.py
 assets/
@@ -47,6 +51,7 @@ assets/
   logo-hdr-pq.jpg
   logo-hdr-tonemapped.png
   bright-pixels-rec2100-pq.icc
+  og-image.png
   manifest.json
   gcai/
     ...the same five comparison files...
@@ -55,6 +60,14 @@ assets/
 ```
 
 The five root images are the public, generic set. `assets/gcai/` is selected only when the URL contains `?gcai=true`.
+
+The favicon family and 1200 × 630 Open Graph image use only the generic pixel mark. Regenerate them with:
+
+```bash
+python3 scripts/generate_social_assets.py
+```
+
+This writes `favicon.svg`, the multi-size `favicon.ico`, `apple-touch-icon.png`, and `assets/og-image.png`. The checked-in page metadata always advertises the unbranded public URL and image; `?gcai=true` does not leak into link previews.
 
 ## Comparison files
 
